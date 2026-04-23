@@ -137,7 +137,7 @@ No manual intervention is required.
 ---
 
 ### Step 5 — Query in Athena
-Navigate to **Amazon Athena** and run queries against the star schema:
+Navigate to **Amazon Athena** and run queries against the star schema, for testing purposes. Results will be provided in a seperate folder.
 
 ```sql
 -- Sales by Category
