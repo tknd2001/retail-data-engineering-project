@@ -156,3 +156,81 @@ FROM fact_sales
 GROUP BY product_name
 ORDER BY 2 DESC;
 ```
+
+## Data Quality Rules
+
+All five Glue validation jobs enforce the following rules. Valid records are 
+promoted to the staging layer, invalid records are written to the rejected 
+layer with a descriptive error reason captured in the audit log.
+
+---
+
+### Customers Validation
+
+| # | Rule | Detail |
+|---|---|---|
+| 1 | **Required columns exist** | `customer_id`, `customer_name`, `city`, `state`, `signup_date` must all be present in the file |
+| 2 | **No nulls or blanks** | `customer_id`, `customer_name` and `signup_date` cannot be null or empty |
+| 3 | **Valid signup_date format** | `signup_date` must match `yyyy-MM-dd` format |
+| 4 | **No duplicate PKs** | `customer_id` must be unique — first occurrence kept, duplicates rejected |
+
+---
+
+### Products Validation
+
+| # | Rule | Detail |
+|---|---|---|
+| 1 | **Required columns exist** | `product_id`, `product_name`, `category`, `price` must all be present in the file |
+| 2 | **No nulls or blanks** | `product_id`, `product_name` and `price` cannot be null or empty |
+| 3 | **Valid price data type** | `price` must be castable to double |
+| 4 | **Price range** | `price` must be > 0 |
+| 5 | **No duplicate PKs** | `product_id` must be unique — first occurrence kept, duplicates rejected |
+
+---
+
+### Stores Validation
+
+| # | Rule | Detail |
+|---|---|---|
+| 1 | **Required columns exist** | `store_id`, `store_name`, `city`, `state`, `region` must all be present in the file |
+| 2 | **No nulls or blanks** | `store_id`, `store_name` and `region` cannot be null or empty |
+| 3 | **No duplicate PKs** | `store_id` must be unique — first occurrence kept, duplicates rejected |
+
+---
+
+### Orders Validation
+
+| # | Rule | Detail |
+|---|---|---|
+| 1 | **Required columns exist** | `order_id`, `customer_id`, `store_id`, `order_date` must all be present in the file |
+| 2 | **No nulls or blanks** | All four required columns cannot be null or empty |
+| 3 | **Valid order_date format** | `order_date` must match `yyyy-MM-dd` format |
+| 4 | **No duplicate PKs** | `order_id` must be unique — first occurrence kept, duplicates rejected |
+| 5 | **Foreign key: customer_id** | `customer_id` must exist in the customers dataset |
+| 6 | **Foreign key: store_id** | `store_id` must exist in the stores dataset |
+
+---
+
+### Orders_items Validation
+
+| # | Rule | Detail |
+|---|---|---|
+| 1 | **Required columns exist** | `order_item_id`, `order_id`, `product_id`, `quantity`, `unit_price` must all be present in the file |
+| 2 | **No nulls or blanks** | All five required columns cannot be null or empty |
+| 3 | **Valid quantity data type** | `quantity` must be castable to integer |
+| 4 | **Quantity range** | `quantity` must be > 0 |
+| 5 | **Valid unit_price data type** | `unit_price` must be castable to double |
+| 6 | **Unit price range** | `unit_price` must be > 0 |
+| 7 | **No duplicate PKs** | `order_item_id` must be unique — first occurrence kept, duplicates rejected |
+| 8 | **Foreign key: order_id** | `order_id` must exist in the orders dataset |
+| 9 | **Foreign key: product_id** | `product_id` must exist in the products dataset |
+
+---
+
+### Additional Safeguards Applied Across All Jobs
+
+| Safeguard | Detail |
+|---|---|
+| **Empty file detection** | Jobs raise a descriptive exception if the source file contains no rows, captured in the audit log as FAILED |
+| **Missing file handling** | S3 path failures are caught by the try/except block and logged to audit with a FAILED status and descriptive error message |
+| **Schema mismatch detection** | Jobs explicitly check for required columns before any row-level processing begins |
