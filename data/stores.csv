@@ -1,0 +1,7 @@
+store_id,store_name,city,state,region
+S001,Park Street Store,Kolkata,West Bengal,East
+S002,Salt Lake Store,Kolkata,West Bengal,East
+S003,Howrah Outlet,Howrah,West Bengal,East
+S004,Patna Central,Patna,Bihar,North
+S005,Ranchi Hub,Ranchi,Jharkhand,North
+S006,Bhubaneswar Plaza,Bhubaneswar,Odisha,East

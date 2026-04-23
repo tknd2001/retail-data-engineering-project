@@ -1,0 +1,13 @@
+product_id,product_name,category,price
+P001,Laptop,Electronics,65000
+P002,Headphones,Electronics,2500
+P003,Office Chair,Furniture,7000
+P004,Desk Lamp,Furniture,1800
+P005,Notebook Pack,Stationery,450
+P006,Water Bottle,Accessories,650
+P007,Backpack,Accessories,2200
+P008,Keyboard,Electronics,3200
+P009,Mouse,Electronics,1200
+P010,Monitor,Electronics,14500
+P011,Bad Price Product,Electronics,
+P012,Negative Price Product,Electronics,-500
