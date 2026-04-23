@@ -1,0 +1,13 @@
+customer_id,customer_name,city,state,signup_date
+C001,Amit Roy,Kolkata,West Bengal,2024-01-15
+C002,Riya Sen,Howrah,West Bengal,2024-02-10
+C003,Arjun Dutta,Durgapur,West Bengal,2024-03-05
+C004,Neha Kapoor,Bhubaneswar,Odisha,2024-03-28
+C005,Sourav Ghosh,Siliguri,West Bengal,2024-04-12
+C006,Pooja Sharma,Patna,Bihar,2024-05-09
+C007,Rahul Mehta,Ranchi,Jharkhand,2024-06-02
+C008,Ishita Bose,Kolkata,West Bengal,2024-06-18
+C009,Vikram Jain,Asansol,West Bengal,2024-07-03
+C010,Mina Das,Kharagpur,West Bengal,2024-07-22
+,Bad Null Customer,Kolkata,West Bengal,2024-08-01
+C003,Duplicate Customer,Malda,West Bengal,2024-08-10
