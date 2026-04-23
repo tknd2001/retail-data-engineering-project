@@ -127,13 +127,25 @@ and job status.
 ---
 
 ### Step 4 — Partition Discovery (Automated)
-Once any validation job completes successfully, EventBridge automatically 
-triggers the `start_crawler` Lambda function, which invokes the 
-`retail-raw-crawler`. This registers any new `load_date` partitions in the 
-Glue Data Catalog, making them immediately available in Athena.
+Once any validation job completes successfully, the following automation 
+chain triggers automatically:
+
+```
+Glue validation job SUCCEEDS
+→ EventBridge detects job completion
+→ Triggers start_crawler Lambda function
+→ Lambda invokes retail-raw-crawler
+→ Crawler scans s3://retail-data-project-simulation/raw/
+→ New load_date partitions registered in Glue Data Catalog
+→ Athena immediately sees new data
+```
+
+This eliminates the need to manually run `MSCK REPAIR TABLE` after each 
+pipeline execution. Every time a new `load_date` partition lands in S3, 
+whether from a Glue job or a manual file upload, Athena will automatically 
+be able to query it once the crawler completes.
 
 No manual intervention is required.
-
 ---
 
 ### Step 5 — Query in Athena
