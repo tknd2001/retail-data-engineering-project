@@ -9,29 +9,29 @@ STORED AS PARQUET
 LOCATION 's3://retail-data-project-simulation/staging/products/load_date=2026-04-16/';
 
 CREATE EXTERNAL TABLE staging_customers (
-customer_id STRING,
-customer_name STRING,
-region STRING,
-load_date DATE
+    customer_id STRING,
+    customer_name STRING,
+    region STRING,
+    load_date DATE
 )
 STORED AS PARQUET
 LOCATION 's3://retail-data-project-simulation/staging/customers/load_date=2026-04-16/';
 
 CREATE EXTERNAL TABLE staging_stores (
-store_id STRING,
-store_name STRING,
-region STRING,
-load_date DATE
+    store_id STRING,
+    store_name STRING,
+    region STRING,
+    load_date DATE
 )
 STORED AS PARQUET
 LOCATION 's3://retail-data-project-simulation/staging/stores/load_date=2026-04-16/';
 
 CREATE EXTERNAL TABLE staging_orders (
-order_id STRING,
-customer_id STRING,
-store_id STRING,
-order_date DATE,
-load_date DATE
+    order_id STRING,
+    customer_id STRING,
+    store_id STRING,
+    order_date DATE,
+    load_date DATE
 )
 STORED AS PARQUET
 LOCATION 's3://retail-data-project-simulation/staging/orders/load_date=2026-04-16/';
