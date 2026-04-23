@@ -11,6 +11,8 @@ This project was about building an end-to-end data engineering pipeline in AWS t
 | **Amazon EventBridge** | Event-driven pipeline automation |
 | **AWS IAM** | Role-based access control |
 
+
+```
 s3://retail-data-project-simulation/
 ├── raw/
 │   ├── customers/load_date=YYYY-MM-DD/
@@ -45,6 +47,7 @@ s3://retail-data-project-simulation/
 │   └── stores/
 └── fact/
     └── sales/
+```
 
 ### IAM Role Setup
 Create an IAM role named `GlueETLRoleS3Access` with the following policies attached:
